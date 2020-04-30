@@ -40,9 +40,27 @@ $(document).ready(function(){
         cats.append(title, temp, windSpeed);
         box.append(cats);
         $('#today').append(box);
+
+        getWeather(searchLoc);
+        getUVIndex(data.coord.lat, data.coord.lon);
+
+      }
+    });
+
+  }
+  function getWeather(searchLoc) {
+    $.ajax({
+      type: 'GET',
+      url: "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=7ba67ac190f85fdba2e2dc6b9d32e93c&units=imperial",
+      dataType: 'JSON',
+      success: function(data) {
+        $('#weatherInfo').html('<h1 class=headerJumbo> Forecast: </h1>').append('<div class=rows>');
+        
       }
     })
   }
+
+
 
 })
 
