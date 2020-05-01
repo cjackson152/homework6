@@ -67,7 +67,9 @@ $(document).ready(function(){
             let img = $('<img>').attr('src', 'http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png');
             let p1 = $('<p>').addClass('div-text').text('Temp: ' +data.list[i].main.temp_max + 'farenheit');
             let p2 = $('<p>').addClass('div-text').text('Humidity: ' + data.list[i].main.humidity + '%');
-            
+            col.append(dogs.append(divBody.append(title, img, p1, p2)));
+            $('weatherInfo .row').append(col);
+
 
           }
         }
@@ -75,6 +77,40 @@ $(document).ready(function(){
     })
   }
 
+  function getUVIndex(lat, lon) {
+    $.ajax({
+      type: 'GET',
+      url:  'http://api.openweathermap.org/data/2.5/uvi?appid=7ba67ac190f85fdba2e2dc6b9d32e93c&lat=' + lat + '&lon=' + lon,
+      dataType: 'JSON',
+      success: function(data) {
+        let uv = $('<p>').text('UV Index: ');
+        let btn = $('<span>').addClass('btn btn-md').text(data.value);
+
+        if(data.value <3) {
+          btn.addClass('btn-primary');
+      
+        } else if (data.value <7) {
+          btn.addClass('btn-success');
+
+        } else{
+          btn.addClass('btn-light');
+
+        }
+        $('#today .divBody').append(uv.append(btn));
+
+      }
+ 
+    })
+  }
+  let previousSearch = JSON.parse(window.localStorage.getItem('previousSearch')) || [];
+
+  if(previousSearch > 0) {
+    searchW(previousSearch[previousSearch.length - 1]);
+  }
+
+  for(let i = 0; i < previousSearch.length; i++){
+    listAppend(previousSearch[i]);
+  }
 
 
 })
