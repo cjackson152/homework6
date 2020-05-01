@@ -55,7 +55,22 @@ $(document).ready(function(){
       dataType: 'JSON',
       success: function(data) {
         $('#weatherInfo').html('<h1 class=headerJumbo> Forecast: </h1>').append('<div class=rows>');
-        
+
+
+        for(var i=0; i<data.list.length; i++) {
+          if (data.list[i].dt_txt.indexOf('12:00:00') !== -1) {
+          
+            let col = $('<div>').addClass('col-md-2');
+            let dogs = $('<div>').addClass('div-dogs');
+            let divBody = $('<div>').addClass('div-body');
+            let title = $('<h1>').addClass('div-title');
+            let img = $('<img>').attr('src', 'http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png');
+            let p1 = $('<p>').addClass('div-text').text('Temp: ' +data.list[i].main.temp_max + 'farenheit');
+            let p2 = $('<p>').addClass('div-text').text('Humidity: ' + data.list[i].main.humidity + '%');
+            
+
+          }
+        }
       }
     })
   }
