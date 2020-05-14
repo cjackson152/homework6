@@ -1,0 +1,21 @@
+p {
+    font-weight: bolder;
+    color: white;
+}
+.searchTitle{
+    color: greenyellow;
+    font-weight: bolder;
+}
+
+.card-title{
+    color: white;
+    font-weight: bolder;
+}
+
+body {
+    background-color: slategrey;
+}
+
+.btn {
+    color:greenyellow
+}
